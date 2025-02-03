@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     # Local
     "pages.apps.PagesConfig",
     "accounts.apps.AccountsConfig",
+    "decks.apps.DecksConfig",
 ]
 
 # django-crispy-forms

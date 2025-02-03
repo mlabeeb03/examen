@@ -1,0 +1,11 @@
+{% extends "_base.html" %}
+
+{% block title %}All Decks{% endblock title %}
+
+{% block content %}
+  {% for deck in deck_list %}
+    <div>
+      <h2><a href="{{ deck.get_absolute_url }}">{{ deck.title }}</a></h2>
+    </div>
+  {% endfor %}
+{% endblock content %}

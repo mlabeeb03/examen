@@ -1,0 +1,42 @@
+@mixin sidebar-section{
+    margin: 2.5em 0 0 2.5em;
+}
+
+body{
+    margin: 0px;
+    padding: 0px;
+
+    .container{
+        display: flex;
+
+        .sidebar{
+            width: 15em;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+
+            .header{
+                @include sidebar-section();
+                height: 5em;
+            }
+
+            .body{
+                @include sidebar-section();
+                flex: 1;
+
+                ul{
+                    text-decoration: none;
+                }
+            }
+
+            .footer{
+                @include sidebar-section();
+                height: 10em;
+            }
+        }
+
+        .content{
+            flex: 1;
+        }
+    }
+}

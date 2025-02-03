@@ -1,13 +1,31 @@
 body {
-    min-height: 75rem;
-    padding-top: 4.5rem;
-  }
-
-h1 {
-    color: rgb(87, 134, 170);
-  }
-
-.tom {
-height: 300px;
-width: auto;
+  margin: 0px;
+  padding: 0px;
 }
+body .container {
+  display: flex;
+}
+body .container .sidebar {
+  width: 15em;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+body .container .sidebar .header {
+  margin: 2.5em 0 0 2.5em;
+  height: 5em;
+}
+body .container .sidebar .body {
+  margin: 2.5em 0 0 2.5em;
+  flex: 1;
+}
+body .container .sidebar .body ul {
+  text-decoration: none;
+}
+body .container .sidebar .footer {
+  margin: 2.5em 0 0 2.5em;
+  height: 10em;
+}
+body .container .content {
+  flex: 1;
+}/*# sourceMappingURL=base.css.map */
