@@ -1,0 +1,22 @@
+{% macro deck_macro(deck, user, csrf_input) %}
+<div class="overview">
+    <div class="main">
+        <div class="name">
+            <a href="{{ deck.get_absolute_url() }}">
+            {{ deck.deck.title }}
+            </a>
+        </div>
+        <div class="author">
+            By {{ deck.deck.author }}
+        </div>
+    </div>
+    <div class="meta">
+        Cards: {{ deck.cards.count() }}
+    </div>
+    <div class="progress">
+        <div class="learning">
+        Learning
+        </div>
+    </div>
+</div>
+{% endmacro %}

@@ -1,10 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db import transaction
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.views import View
 from django.views.generic import DetailView, ListView
 
-from .models import Deck, UserDeck
+from .models import Deck, UserCard, UserDeck
 
 
 class AllDeckListView(ListView):
@@ -40,7 +41,12 @@ class DeckDetailView(DetailView):
 class AddLearningDeckView(LoginRequiredMixin, View):
     def post(self, request):
         deck_id = request.POST.get("deck_id")
-        UserDeck.objects.create(user=request.user, deck_id=deck_id)
+        deck = Deck.objects.get(id=deck_id)
+        with transaction.atomic():
+            user_deck = UserDeck.objects.create(user=request.user, deck_id=deck_id)
+            UserCard.objects.bulk_create(
+                [UserCard(card=card, user_deck=user_deck) for card in deck.cards.all()]
+            )
         return redirect(reverse("learning_decks"))
 
 

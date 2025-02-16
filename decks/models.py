@@ -22,7 +22,7 @@ class Deck(models.Model):
         return reverse("deck_detail", args=[str(self.id)])
 
     def is_learner(self, user):
-        return self.user_subscribed_decks.filter(user=user).exists()
+        return self.learning_decks.filter(user=user).exists()
 
 
 class Card(models.Model):
@@ -36,10 +36,10 @@ class Card(models.Model):
 
 class UserDeck(models.Model):
     deck = models.ForeignKey(
-        Deck, on_delete=models.CASCADE, related_name="user_subscribed_decks"
+        Deck, on_delete=models.CASCADE, related_name="learning_decks"
     )
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="subscribed_decks"
+        User, on_delete=models.CASCADE, related_name="learning_decks"
     )
 
     def __str__(self):
@@ -55,16 +55,18 @@ class UserCard(models.Model):
         Review = 2, "Review"
         Relearning = 3, "Relearning"
 
-    card = models.ForeignKey(Card, on_delete=models.CASCADE, related_name="user_cards")
+    card = models.ForeignKey(
+        Card, on_delete=models.CASCADE, related_name="learning_cards"
+    )
     user_deck = models.ForeignKey(
         UserDeck, on_delete=models.CASCADE, related_name="cards"
     )
-    state = models.PositiveSmallIntegerField(choices=State.choices, default=None)
-    step = models.IntegerField(default=None)
-    stability = models.FloatField(default=None)
-    difficulty = models.FloatField(default=None)
-    due = models.DateTimeField(default=None)
-    last_review = models.DateTimeField(default=None)
+    state = models.PositiveSmallIntegerField(choices=State.choices, null=True)
+    step = models.IntegerField(null=True)
+    stability = models.FloatField(null=True)
+    difficulty = models.FloatField(null=True)
+    due = models.DateTimeField(null=True)
+    last_review = models.DateTimeField(null=True)
 
     def __str__(self):
         return f"{self.card} | Due: {self.due}"

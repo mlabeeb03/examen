@@ -1,10 +1,13 @@
-{% extends "_base.html" %}
+{% extends "_base_header.html" %}
 
 {% block title %}{{ deck }}{% endblock title %}
 
+{% block header_title %}{{ deck }}{% endblock header_title %}
+
+{% block description %} By {{ deck.deck.author }}{% endblock description %}
+
 {% block content %}
-  <div>
-    <h2>{{ deck }}</h2>
-    <p>Author: {{ deck.author }}</p>
+  <div class="start">
+    Start
   </div>
 {% endblock content %}

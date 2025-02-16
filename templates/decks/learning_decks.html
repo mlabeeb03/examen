@@ -1,5 +1,7 @@
 {% extends "_base_header.html" %}
 
+{% from "learning_deck_macro.html" import deck_macro %}
+
 {% block title %}Learning Decks{% endblock title %}
 
 {% block header_title %}My Learning Decks{% endblock header_title %}
@@ -7,9 +9,10 @@
 {% block description %}Choose a deck and start learning.{% endblock description %}
 
 {% block content %}
-    {% for learning_deck in deck_list %}
-        <div>
-        <h2><a href="{{ learning_deck.get_absolute_url }}">{{ learning_deck.deck.title }}</a></h2>
-        </div>
-    {% endfor %}
+    <div class="deck-list">
+        {% for deck in deck_list %}
+            {{ deck_macro(deck, request.user, csrf_input) }}
+        {% endfor %}
+    </div>
 {% endblock content %}
+
