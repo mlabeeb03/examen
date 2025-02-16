@@ -21,6 +21,9 @@ class Deck(models.Model):
     def get_absolute_url(self):
         return reverse("deck_detail", args=[str(self.id)])
 
+    def is_learner(self, user):
+        return self.user_subscribed_decks.filter(user=user).exists()
+
 
 class Card(models.Model):
     question = models.CharField(max_length=200)
@@ -38,6 +41,9 @@ class UserDeck(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="subscribed_decks"
     )
+
+    def __str__(self):
+        return self.deck.title
 
     def get_absolute_url(self):
         return reverse("learning_deck_detail", args=[str(self.id)])

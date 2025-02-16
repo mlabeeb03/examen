@@ -6,12 +6,10 @@
   <div>
     <h2>{{ deck.title }}</h2>
     <p>Author: {{ deck.author }}</p>
-    {% if user.is_authenticated %}
-      <form action="{% url 'add_learning_deck' %}" method="POST">
-        {% csrf_token %}
-        <input type="hidden" name="deck_id" value="{{ deck.id }}">
-        <button type="submit">Add to Learning Decks</button>
-      </form>
-    {% endif %}
+    <form action="{{ url('add_learning_deck') }}" method="POST">
+      {% csrf_token %}
+      <input type="hidden" name="deck_id" value="{{ deck.id }}">
+      <button type="submit">Add to Learning Decks</button>
+    </form>
   </div>
 {% endblock content %}

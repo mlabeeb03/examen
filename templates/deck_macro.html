@@ -1,0 +1,32 @@
+{% macro deck_macro(deck, user, csrf_input) %}
+<div class="overview">
+    <div class="main">
+        <div class="name">
+            <a href="{{ deck.get_absolute_url() }}">
+            {{ deck.title }}
+            </a>
+        </div>
+        <div class="author">
+            By {{ deck.author }}
+        </div>
+    </div>
+    <div class="meta">
+        Cards: {{ deck.cards.count() }}
+    </div>
+    <div class="progress">
+        {% if deck.is_learner(user) %}
+        <div class="learning">
+        Learning
+        </div>
+        {% else %}
+        <div class="not-learning">
+            <form action="{{ url('add_learning_deck') }}" method="POST">
+                {{ csrf_input }}
+                <input type="hidden" name="deck_id" value="{{ deck.id }}">
+                <button type="submit">Add to Learning</button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endmacro %}

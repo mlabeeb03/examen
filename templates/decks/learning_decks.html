@@ -1,6 +1,10 @@
-{% extends "_base.html" %}
+{% extends "_base_header.html" %}
 
 {% block title %}Learning Decks{% endblock title %}
+
+{% block header_title %}My Learning Decks{% endblock header_title %}
+
+{% block description %}Choose a deck and start learning.{% endblock description %}
 
 {% block content %}
     {% for learning_deck in deck_list %}

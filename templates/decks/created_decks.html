@@ -1,6 +1,12 @@
-{% extends "_base.html" %}
+{% extends "_base_header.html" %}
 
 {% block title %}Created Decks{% endblock title %}
+
+{% block header_title %}Browse All Your Created Decks{% endblock header_title %}
+
+{% block description %}Create or update your custom decks.{% endblock description %}
+
+
 
 {% block content %}
   {% for deck in deck_list %}

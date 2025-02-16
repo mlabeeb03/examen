@@ -1,42 +1,156 @@
+$extra-light-gray: #ebebeb;
+$light-gray: #e2e2e2;
+$gray: #969696;
+$dark-gray: #4d4d4d;
+$blue: #1570ef;
+$light-blue: #2e90fa;
+$blue-shade: #eaf3fc;
+
 @mixin sidebar-section{
-    margin: 2.5em 0 0 2.5em;
+    margin: 2em 0 0 2.5em;
+}
+
+@mixin a-tag{
+    text-decoration: none;
+
+    &:visited{
+        text-decoration: none;
+    }
+}
+
+@mixin sidebar-div{
+    margin-top: 1em;
+}
+
+@mixin sidebar-a-tag{
+    @include a-tag();
+    font-size: 1.25em;
+    color: $dark-gray;
+    width: 10em;
+    height: 2em;
+    display: flex;
+    align-items: center;
+    border-radius: 1em;
+    padding-left: 1em;
+
+    &:hover{
+        color: $blue;
+        background-color: $blue-shade;
+    }
 }
 
 body{
     margin: 0px;
     padding: 0px;
+    font-family: Arial;
 
     .container{
         display: flex;
 
         .sidebar{
-            width: 15em;
+            width: 18em;
             display: flex;
             flex-direction: column;
             height: 100vh;
+            border-right: 1px solid $dark-gray;
+            box-shadow: 2px 0px $light-gray;
 
             .header{
                 @include sidebar-section();
                 height: 5em;
+                display: flex;
+                align-items: center;
+
+                .title{
+                    a{
+                        @include a-tag();
+                        color: red;
+                        font-size: 2em;
+                        font-weight: bold;
+                    }
+                }
             }
 
             .body{
                 @include sidebar-section();
                 flex: 1;
 
-                ul{
-                    text-decoration: none;
+                div{
+                    @include sidebar-div();
+                    a{
+                        @include sidebar-a-tag();
+                    }
                 }
             }
 
             .footer{
                 @include sidebar-section();
                 height: 10em;
+
+                div{
+                    @include sidebar-div();
+                    a{
+                        @include sidebar-a-tag();
+                    }
+                }
             }
         }
 
         .content{
             flex: 1;
+            padding: 2em;
+
+            .header{
+                display: flex;
+                flex-direction: column;
+
+                .title{
+                    font-size: 3em;
+                    font-weight: bold;
+                    color: $dark-gray;
+                }
+
+                .description{
+                    font-size: 1.25em;
+                    color: $gray;
+                }
+            }
+
+            .workspace{
+                margin-top: 2em;
+
+                .deck-list{
+                    .overview{
+                        color: $dark-gray;
+                        display: flex;
+                        justify-content: space-between;
+                        background-color: $extra-light-gray;
+                        height: 4em;
+                        align-items: center;
+                        border-radius: 1em;
+                        padding: 1em;
+                        font-size: 1.25em;
+                        margin-bottom: 1em;
+
+                        .main{
+                            .name{
+                                a{
+                                    @include a-tag();
+                                    font-size: 2em;
+                                    color: $blue;
+                                }
+
+                            }
+                        }
+
+                        .progress{
+                            .learning{
+                                color: green;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
